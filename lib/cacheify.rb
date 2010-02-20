@@ -29,7 +29,7 @@ module Cacheify
   #
   # === Example
   # cache_method :big_calculation, :expires_in => 5.minutes
-  def cache_method(*symbols)
+  def cacheify(*symbols)
     options = symbols.last.is_a?(Hash) ? symbols.delete(symbols.last) : {}
 
     symbols.each do |method|
@@ -46,6 +46,4 @@ module Cacheify
       end
     end
   end
-
-  alias :cache_methods :cache_method
 end
