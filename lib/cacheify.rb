@@ -13,7 +13,7 @@ module Cacheify
   # === Parameters
   # store options as understood by ActiveSupport::Cache#lookup_store
   def self.cache_store=(store_option)
-    @@cache_store = ActiveSupport::Cache.lookup_store(store_option)
+    @cache_store = ActiveSupport::Cache.lookup_store(store_option)
   end
 
   def self.cache # :nodoc: 
