@@ -30,7 +30,7 @@ module Cacheify
   # === Example
   # cache_method :big_calculation, :expires_in => 5.minutes
   def cacheify(*symbols)
-    options = symbols.last.is_a?(Hash) ? symbols.delete(symbols.last) : {}
+    options = symbols.extract_options!
 
     symbols.each do |method|
       non_cached_method = "_non_cached_#{method}".to_sym 
