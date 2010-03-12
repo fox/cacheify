@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "cacheify.gemspec",
      "lib/cacheify.rb",
      "spec/cacheify_spec.rb",
      "spec/spec.opts",
