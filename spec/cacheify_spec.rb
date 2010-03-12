@@ -10,7 +10,7 @@ end
 describe "Cacheify" do
   before :all do
     Foo.extend Cacheify
-    Foo.cacheify :bar, :hello => "Friend"
+    Foo.cacheify :bar
     
     @foo = Foo.new
     @first_call = @foo.bar("hello")

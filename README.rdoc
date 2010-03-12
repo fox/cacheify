@@ -1,6 +1,56 @@
-= cacheify
+= Cacheify
 
-Description goes here.
+Simple caching of methods calls.
+
+Cacheify uses ActiveSupport::Cache::Store to perform caching so, depending on
+what you choose, it may cache to memory, disk, memcache or
+whatever is supported by the cache store.
+
+== Installation
+
+  sudo gem install cacheify
+
+== Usage
+
+Mixin the Cacheify module, use the +cacheify+ method.
+  
+  require 'cacheify'
+  
+  class Foo
+    include Cacheify
+    cacheify :bar, :expires_in => 1.hour
+    
+    def bar
+    end
+  end
+
+And you're +foo+ instance calls to +bar+ will get cached.
+
+  Foo.new.bar # will hit cache if cached, or get cached otherwise
+
+To enable cacheify on existing class just +extend+:
+
+  Thing.extend Cacheify
+  Thing.caches :very_expensive_operation
+
+If you use Cacheify <b>a lot</b>, you may even do:
+
+  Object.extend Cacheify
+
+But that's just evil.
+
+=== Choosing your Cache store
+
+To setup what cache store Cacheify is using:
+
+  Cacheify.cache_store = :file_store, "tmp/cacheify"
+
+The arguments are the same as in ActiveSupport::Cache#lookup_store[http://api.rubyonrails.org/classes/ActiveSupport/Cache.html#M001011]
+
+== More info
+
+* ActiveSupport::Cache[http://api.rubyonrails.org/classes/ActiveSupport/Cache.html] is what's used for caching
+* Why cacheify? {Introductory blog post}[http://blog.hakeraj.com].
 
 == Note on Patches/Pull Requests
  
@@ -14,4 +64,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 Saša_Branković. See LICENSE for details.
+Copyright (c) 2010 Sasa Brankovic. See LICENSE for details.

@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "cacheify"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Simple caching of method calls}
+    gem.description = %Q{Cacheify can cache method calls to memory, disk, memcache or whatever is supported by the ActiveSupport::Cache::Store.}
     gem.email = "sasa@hakeraj.com"
     gem.homepage = "http://github.com/fox/cacheify"
     gem.authors = ["Saša_Branković"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.add_dependency "activesupport"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
