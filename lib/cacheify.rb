@@ -35,8 +35,7 @@ module Cacheify
 
       symbols.each do |method|
         non_cached_method = "_non_cached_#{method}".to_sym 
-        return if respond_to? non_cached_method # cached already, skip it
-        
+        return if method_defined?(non_cached_method) # cached already, skip it
         alias_method non_cached_method, method
         
         define_method(method) do |*args, &block|
