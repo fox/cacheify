@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cacheify}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Sa\305\241a_Brankovi\304\207"]
-  s.date = %q{2010-03-12}
+  s.authors = ["Sa\305\241a Brankovi\304\207"]
+  s.date = %q{2010-03-16}
   s.description = %q{Cacheify can cache method calls to memory, disk, memcache or whatever is supported by the ActiveSupport::Cache::Store.}
   s.email = %q{sasa@hakeraj.com}
   s.extra_rdoc_files = [
