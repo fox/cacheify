@@ -4,6 +4,10 @@ require 'cacheify'
 require 'spec'
 require 'spec/autorun'
 
+
+Cacheify.cache_store = :memory_store
+
+
 Spec::Runner.configure do |config|
   
 end
