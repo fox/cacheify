@@ -1,10 +1,10 @@
 = Cacheify
 
-Simple caching of methods calls.
+Easy caching of methods calls.
 
-Cacheify uses ActiveSupport::Cache::Store to perform caching so, depending on
-what you choose, it may cache to memory, disk, memcache or
-whatever is supported by the cache store.
+Cacheify uses ActiveSupport::Cache::Store to do caching so, depending on
+what you choose, it may cache to memory, disk, memcache or whatever is 
+supported by the cache store.
 
 == Installation
 
@@ -17,23 +17,33 @@ Mixin the Cacheify module, use the +cacheify+ method.
   require 'cacheify'
   
   class Foo
-    include Cacheify
-    cacheify :bar, :expires_in => 1.hour
-    
     def bar
     end
+
+    include Cacheify
+    cacheify :bar, :expires_in => 1.hour
   end
 
 And you're +foo+ instance calls to +bar+ will get cached.
 
   Foo.new.bar # will hit cache if cached, or get cached otherwise
 
-To enable cacheify on existing class just +extend+:
+Caveat: You have to call +cacheify+ *after* defining +bar+.
+
+To enable cacheify on the existing class just +extend+:
 
   Thing.extend Cacheify
   Thing.caches :very_expensive_operation
 
-If you use Cacheify <b>a lot</b>, you may even do:
+To cache a method on a specific object:
+  
+  boo = Thing.new
+  boo.extend Cacheify
+  boo.caches :very_expensive_operation
+
+And only that instance of +Thing+ will have its +very_expensive_operation+ cached.
+
+If you use Cacheify <b>a lot</b>, you may do:
 
   Object.extend Cacheify
 
@@ -50,7 +60,7 @@ The arguments are the same as in ActiveSupport::Cache#lookup_store[http://api.ru
 == More info
 
 * ActiveSupport::Cache[http://api.rubyonrails.org/classes/ActiveSupport/Cache.html] is what's used for caching
-* Why cacheify? {Introductory blog post}[http://blog.hakeraj.com].
+* Why cacheify? {Introductory blog post}[http://blog.hakeraj.com/easy-caching-of-methods-with-cacheify].
 
 == Note on Patches/Pull Requests
  
