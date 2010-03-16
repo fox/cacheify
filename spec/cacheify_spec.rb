@@ -1,7 +1,17 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-# Example class we'll use in specs
+# Example classes we'll use in specs
+
 class Foo 
+  def bar(something = nil)
+    "#{rand(99999999)}#{something}"
+  end
+  def rab(something = nil)
+    "#{rand(99999999)}#{something}"
+  end
+end
+
+class Hoo
   def bar(something = nil)
     "#{rand(99999999)}#{something}"
   end
@@ -10,19 +20,28 @@ end
 describe "Cacheify" do
   before :all do
     Foo.extend Cacheify
-    Foo.cacheify :bar
+    Hoo.extend Cacheify 
+
+    Foo.cacheify :bar, :rab
+    Hoo.cacheify :bar
+
+    foo = Foo.new
+    hoo = Hoo.new
     
-    @foo = Foo.new
-    @first_call = @foo.bar("hello")
+    @foo_bar_1_call = foo.bar("hello")
+    @foo_bar_2_call = foo.bar("hello")
+    @foo_bar_diff_args_1_call = foo.bar("howdy")
+    @foo_rab_1_call = foo.rab("hello")
+    @hoo_bar_1_call = hoo.bar("hello")
   end
 
-  context "calling method twice on a cachified object" do
-    before do
-      @second_call = @foo.bar("hello")
-    end
-    
-    it "should return cached result second time" do
-      @first_call.should == @second_call
-    end
+  it "should return cached result second time" do
+    @foo_bar_1_call.should == @foo_bar_2_call
+  end
+  
+  specify "cache should be scoped to class, method name and args" do
+    @hoo_bar_1_call.should_not == @foo_bar_1_call
+    @foo_rab_1_call.should_not == @foo_bar_1_call
+    @foo_bar_diff_args_1_call.should_not == @foo_bar_1_call
   end
 end

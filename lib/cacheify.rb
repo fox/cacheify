@@ -39,7 +39,7 @@ module Cacheify
       alias_method non_cached_method, method
       
       define_method(method) do |*args, &block|
-        cache_name = Digest::MD5.hexdigest(args.inspect)
+        cache_name = Digest::MD5.hexdigest("#{self.class.name}#{method}#{args.inspect}")
         marshalled_result = Cacheify.cache.fetch(cache_name, options) do 
           send(non_cached_method, *args, &block)
         end
