@@ -33,13 +33,13 @@ Caveat: You have to call +cacheify+ *after* defining +bar+.
 To enable cacheify on the existing class just +extend+:
 
   Thing.extend Cacheify
-  Thing.caches :very_expensive_operation
+  Thing.cacheify :very_expensive_operation
 
 To cache a method on a specific object:
   
   boo = Thing.new
   boo.extend Cacheify
-  boo.caches :very_expensive_operation
+  boo.cacheify :very_expensive_operation
 
 And only that instance of +Thing+ will have its +very_expensive_operation+ cached.
 
