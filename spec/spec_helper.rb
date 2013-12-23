@@ -8,6 +8,6 @@ require 'rspec/autorun'
 Cacheify.cache_store = :memory_store
 
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   
 end
