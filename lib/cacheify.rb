@@ -30,7 +30,7 @@ module Cacheify
   # === Example
   # cache_method :big_calculation, :expires_in => 5.minutes
   def cacheify(*symbols)
-    (self.is_a?(Class) ? self : metaclass).class_eval do
+    (self.is_a?(Class) ? self : singleton_class).class_eval do
       options = symbols.extract_options!
 
       symbols.each do |method|
